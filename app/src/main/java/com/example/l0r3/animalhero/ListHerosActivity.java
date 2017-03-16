@@ -4,9 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,41 +24,55 @@ import com.example.l0r3.animalhero.modelo.Hero;
 
 import java.util.List;
 
-public class ListaHerosActivity extends AppCompatActivity {
+public class ListHerosActivity extends AppCompatActivity {
 
-    private ListView listaHeros;
+    private ListView listHeros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_heros);
+        setContentView(R.layout.activity_list_heros);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent intent = new Intent(ListHerosActivity.this, FormActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         HeroDAO dao = new HeroDAO(this);
         List<Hero> heros = dao.buscaHeros();
         dao.close();
         ArrayAdapter<Hero> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, heros);
-        listaHeros = (ListView) findViewById(R.id.lista_heros);
-        listaHeros.setAdapter(adapter);
+        listHeros = (ListView) findViewById(R.id.list_heros);
+        listHeros.setAdapter(adapter);
 
-        Button novoHero = (Button) findViewById(R.id.novo_hero);
-        novoHero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // A intent faz com que o Android permita mudar de activity
-                Intent intent = new Intent(ListaHerosActivity.this, FormActivity.class);
-                startActivity(intent);
-            }
-        });
+//        Button novoHero = (Button) findViewById(android.R.id.novo_hero);
+//        novoHero.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // A intent faz com que o Android permita mudar de activity
+//                Intent intent = new Intent(ListHerosActivity.this, FormActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
-        registerForContextMenu(listaHeros);
+        registerForContextMenu(listHeros);
 
 
-        listaHeros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listHeros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
-                Hero hero = (Hero) listaHeros.getItemAtPosition(position);
-                Toast.makeText(ListaHerosActivity.this, "Hero: " + hero.getNome() + " selecionado!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ListaHerosActivity.this, FormActivity.class);
+                Hero hero = (Hero) listHeros.getItemAtPosition(position);
+                Toast.makeText(ListHerosActivity.this, "Hero: " + hero.getNome() + " selecionado!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ListHerosActivity.this, FormActivity.class);
                 intent.putExtra("Hero", hero);
                 startActivity(intent);
 
@@ -66,13 +83,15 @@ public class ListaHerosActivity extends AppCompatActivity {
         });
     }
 
+
+
     public void carregaLista() {
         HeroDAO dao = new HeroDAO(this);
         List<Hero> heros = dao.buscaHeros();
         dao.close();
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, heros);
-        listaHeros.setAdapter(adapter);
+        listHeros.setAdapter(adapter);
     }
 
     public void onResume() {
@@ -84,7 +103,7 @@ public class ListaHerosActivity extends AppCompatActivity {
     // Criando menu de contexto
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         final AdapterView.AdapterContextMenuInfo posicao = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        final Hero heroClicado = (Hero) listaHeros.getItemAtPosition(posicao.position);
+        final Hero heroClicado = (Hero) listHeros.getItemAtPosition(posicao.position);
 
         MenuItem itemSite = menu.add("Visitar site");
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
@@ -111,9 +130,9 @@ public class ListaHerosActivity extends AppCompatActivity {
         itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (ActivityCompat.checkSelfPermission(ListaHerosActivity.this, Manifest.permission.CALL_PHONE)
+                if (ActivityCompat.checkSelfPermission(ListHerosActivity.this, Manifest.permission.CALL_PHONE)
                         != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(ListaHerosActivity.this,
+                    ActivityCompat.requestPermissions(ListHerosActivity.this,
                             new String[]{Manifest.permission.CALL_PHONE}, 123);
                 } else {
                     Intent intentLigar = new Intent(Intent.ACTION_CALL);
@@ -130,9 +149,9 @@ public class ListaHerosActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                HeroDAO dao = new HeroDAO(ListaHerosActivity.this);
+                HeroDAO dao = new HeroDAO(ListHerosActivity.this);
                 dao.deleta(heroClicado);
-                Toast.makeText(ListaHerosActivity.this, "Hero(a):" + heroClicado.getNome() + "deletado(a)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListHerosActivity.this, "Hero(a):" + heroClicado.getNome() + "deletado(a)", Toast.LENGTH_SHORT).show();
                 dao.close();
                 carregaLista();
                 return false;
@@ -140,4 +159,5 @@ public class ListaHerosActivity extends AppCompatActivity {
         }) ;
 
     }
+
 }
