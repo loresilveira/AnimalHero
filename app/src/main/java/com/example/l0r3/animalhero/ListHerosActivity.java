@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -54,16 +55,6 @@ public class ListHerosActivity extends AppCompatActivity {
         listHeros = (ListView) findViewById(R.id.list_heros);
         listHeros.setAdapter(adapter);
 
-//        Button novoHero = (Button) findViewById(android.R.id.novo_hero);
-//        novoHero.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // A intent faz com que o Android permita mudar de activity
-//                Intent intent = new Intent(ListHerosActivity.this, FormActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
         registerForContextMenu(listHeros);
 
 
@@ -97,6 +88,14 @@ public class ListHerosActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         carregaLista();
+    }
+
+    // Menu icons are inflated just as they were with actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.navegacao_lateral, menu);
+        return true;
     }
 
     @Override

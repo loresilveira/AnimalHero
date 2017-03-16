@@ -349,7 +349,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         private void goToList(){
-            Intent intent = new Intent(LoginActivity.this, ListHerosActivity.class);
+            Intent intent = new Intent(LoginActivity.this, NavegacaoLateral.class);
             startActivity(intent);
         }
     }
