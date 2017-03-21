@@ -40,6 +40,20 @@ public class NavegacaoLateral extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        listHeros = (ListView) findViewById(R.id.list_heros);
+
+
+        listHeros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+                Hero hero = (Hero) listHeros.getItemAtPosition(position);
+                Toast.makeText(NavegacaoLateral.this, "Hero: " + hero.getNome() + " selecionado!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NavegacaoLateral.this, FormActivity.class);
+                intent.putExtra("hero", hero);
+                startActivity(intent);
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,25 +74,7 @@ public class NavegacaoLateral extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        HeroDAO dao = new HeroDAO(this);
-        List<Hero> heros = dao.buscaHeros();
-        dao.close();
-        ArrayAdapter<Hero> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, heros);
-        listHeros = (ListView) findViewById(R.id.list_heros);
-        listHeros.setAdapter(adapter);
-
-        registerForContextMenu(listHeros);
-
-        listHeros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
-                Hero hero = (Hero) listHeros.getItemAtPosition(position);
-                Toast.makeText(NavegacaoLateral.this, "Hero: " + hero.getNome() + " selecionado!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(NavegacaoLateral.this, FormActivity.class);
-                intent.putExtra("Hero", hero);
-                startActivity(intent);
-            }
-        });
+         registerForContextMenu(listHeros);
     }
 
     @Override
@@ -103,7 +99,7 @@ public class NavegacaoLateral extends AppCompatActivity
         List<Hero> heros = dao.buscaHeros();
         dao.close();
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, heros);
+        ArrayAdapter<Hero> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, heros);
         listHeros.setAdapter(adapter);
     }
 

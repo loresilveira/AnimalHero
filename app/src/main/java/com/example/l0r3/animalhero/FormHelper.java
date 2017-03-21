@@ -8,9 +8,6 @@ import android.widget.RatingBar;
 
 import com.example.l0r3.animalhero.modelo.Hero;
 
-/**
- * Created by Lore on 15/03/2017.
- */
 public class FormHelper {
     private final EditText campoFormNome;
     private final EditText campoFormEndereco;
@@ -46,15 +43,15 @@ public class FormHelper {
     }
 
     public void preencheForm(Hero hero) {
-        this.hero = hero;
+
         campoFormNome.setText(hero.getNome());
         campoFormEndereco.setText(hero.getEndereco());
         campoFormTelefone.setText(hero.getTelefone());
         campoFormEmail.setText(hero.getEmail());
         campoFormSite.setText(hero.getSite());
         carregaFoto(hero.getCaminhoFoto());
-        this.campoFormNota.setProgress(this.hero.getNota().intValue());
-
+        campoFormNota.setProgress(hero.getNota().intValue());
+        this.hero = hero;
     }
 
     public void carregaFoto(String caminhoFoto) {

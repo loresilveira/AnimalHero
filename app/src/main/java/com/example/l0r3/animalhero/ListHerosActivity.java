@@ -64,7 +64,7 @@ public class ListHerosActivity extends AppCompatActivity {
                 Hero hero = (Hero) listHeros.getItemAtPosition(position);
                 Toast.makeText(ListHerosActivity.this, "Hero: " + hero.getNome() + " selecionado!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ListHerosActivity.this, FormActivity.class);
-                intent.putExtra("Hero", hero);
+                intent.putExtra("hero", hero);
                 startActivity(intent);
 
 
