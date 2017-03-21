@@ -1,3 +1,3 @@
 # AnimalHero
 
-Projeto final da Disciplina App p/ Discpositivos Móveis.
+Projeto final da Disciplina App p/ Dispositivos Móveis.
