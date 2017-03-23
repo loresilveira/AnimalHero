@@ -1,6 +1,10 @@
 package com.example.l0r3.animalhero.modelo;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Lore on 15/03/2017.
@@ -15,6 +19,10 @@ public class Hero implements Serializable {
     private String site;
     private Double nota;
     private String caminhoFoto;
+
+    public Hero() {
+        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
+    }
 
     public String getCaminhoFoto() {
         return caminhoFoto;
@@ -85,6 +93,20 @@ public class Hero implements Serializable {
     public String toString(){
         return getId() + " - " + getNome();
 
+    }
+
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("nome", nome);
+        result.put("endereco", endereco);
+        result.put("telefone", telefone);
+        result.put("email", email);
+        result.put("site", site);
+        result.put("nota", nota);
+
+        return result;
     }
 
 }

@@ -9,7 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.l0r3.animalhero.modelo.Hero;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Lore on 15/03/2017.
@@ -104,4 +106,5 @@ public class HeroDAO extends SQLiteOpenHelper{
         dados.put("nota", hero.getNota());
         return dados;
     }
+
 }
