@@ -33,6 +33,7 @@
             android:name=".ListHerosActivity"
             android:label="@string/title_activity_list_heros"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".modelo.PerfilHeroActivity"></activity>
     </application>
 
 </manifest>
