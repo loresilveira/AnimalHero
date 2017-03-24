@@ -6,10 +6,11 @@ android {
 
     defaultConfig {
         applicationId "com.example.l0r3.animalhero"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -26,6 +27,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:10.2.0'
     compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.google.firebase:firebase-database:10.2.0'
+    compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
 }
 
