@@ -96,8 +96,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     //user logado
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    goToList();
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getEmail());
+                    String userEmail = user.getEmail();
+                    goToList(userEmail);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -177,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Toast.makeText(LoginActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Sucesso",
+                            Toast.makeText(LoginActivity.this, "Conta criada com sucesso!",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -204,6 +205,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
+                        mAuth = FirebaseAuth.getInstance();
+                        FirebaseUser user = mAuth.getCurrentUser();
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
@@ -217,8 +220,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (!task.isSuccessful()) {
                             mStatusTextView.setText(R.string.auth_failed);
                         }
-                        if (task.isComplete()){
-                            goToList();
+                        if (task.isComplete() && task.isSuccessful()) {
+                            Log.d(TAG, "signInWithEmail:goToList" + user.getEmail());
+                            goToList(user.getEmail());
                         }
                         showProgress(false);
                         // [END_EXCLUDE]
@@ -227,8 +231,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // [END sign_in_with_email]
     }
 
-    private void goToList() {
+    private void goToList(String email) {
         Intent intent = new Intent(LoginActivity.this, NavegacaoLateral.class);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
 

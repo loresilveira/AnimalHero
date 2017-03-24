@@ -65,63 +65,6 @@ public class FormActivity extends AppCompatActivity {
 
     }
 
-    public String getUid() {
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
-    }
-
-    private void submitHero() {
-
-        final Hero heroData = helper.pegaHero();
-
-        Toast.makeText(this, "hero..." + heroData.getNome().toString(), Toast.LENGTH_SHORT).show();
-
-        // [START single_value_read]
-        final String userId = getUid();
-        mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        // [START_EXCLUDE]
-                        if (heroData == null) {
-                            // User is null, error out
-                            Log.e(TAG, "User " + userId + " is unexpectedly null");
-                            Toast.makeText(FormActivity.this,
-                                    "Error: could not fetch user.",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            saveNewHero(userId, heroData);
-                        }
-
-                        // Finish this Activity, back to the stream
-                        //setEditingEnabled(true);
-                        finish();
-                        // [END_EXCLUDE]
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                        // [START_EXCLUDE]
-                        //setEditingEnabled(true);
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END single_value_read]
-    }
-
-    private void saveNewHero(String userId, Hero hero) {
-        // Create new post at /user-posts/$userid/$postid and at
-        // /posts/$postid simultaneously
-        String key = mDatabase.child("hero").push().getKey();
-        Map<String, Object> heroValues = hero.toMap();
-
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/hero/" + key, heroValues);
-
-        mDatabase.updateChildren(childUpdates);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_form, menu);
@@ -137,8 +80,8 @@ public class FormActivity extends AppCompatActivity {
                 if (hero.getId() != null) {
                     dao.altera(hero);
                 } else {
-                    submitHero();
-                    //dao.insere(hero);
+                   // submitHero();
+                    dao.insere(hero);
                 }
                 dao.close();
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.l0r3.animalhero.modelo.Hero;
 
@@ -79,6 +80,27 @@ public class HeroDAO extends SQLiteOpenHelper{
 
         c.close();
         return heros;
+    }
+
+    public Hero getHeroByEmail(String email){
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = "email =?";
+
+        Hero hero = new Hero();
+        Cursor c = db.rawQuery("select * from Heros where email = ?", new String[] {email});
+        Log.d("dao", "cursor:" + c.toString());
+        if (c != null) {
+            c.moveToFirst();
+            hero.setId(c.getLong(c.getColumnIndex("id")));
+            hero.setNome(c.getString(c.getColumnIndex("nome")));
+            hero.setEndereco(c.getString(c.getColumnIndex("endereco")));
+            hero.setTelefone(c.getString(c.getColumnIndex("telefone")));
+            hero.setEmail(c.getString(c.getColumnIndex("email")));
+            hero.setSite(c.getString(c.getColumnIndex("site")));
+            hero.setNota(c.getDouble(c.getColumnIndex("nota")));
+        }
+
+       return hero;
     }
 
     public void deleta(Hero hero){

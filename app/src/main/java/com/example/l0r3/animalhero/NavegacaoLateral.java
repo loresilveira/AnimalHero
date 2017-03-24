@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,6 +26,8 @@ import android.widget.Toast;
 
 import com.example.l0r3.animalhero.dao.HeroDAO;
 import com.example.l0r3.animalhero.modelo.Hero;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class NavegacaoLateral extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listHeros;
+    private static final String TAG = "navegaçãoTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,6 @@ public class NavegacaoLateral extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 Intent intent = new Intent(NavegacaoLateral.this, FormActivity.class);
                 startActivity(intent);
             }
@@ -74,7 +76,7 @@ public class NavegacaoLateral extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-         registerForContextMenu(listHeros);
+        registerForContextMenu(listHeros);
     }
 
     @Override
@@ -165,7 +167,7 @@ public class NavegacaoLateral extends AppCompatActivity
                 carregaLista();
                 return false;
             }
-        }) ;
+        });
 
     }
 
@@ -193,16 +195,24 @@ public class NavegacaoLateral extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.map) {
+            Intent intent = new Intent(NavegacaoLateral.this, MapsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.my_profile) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            HeroDAO dao = new HeroDAO(NavegacaoLateral.this);
+            Hero hero = dao.getHeroByEmail(user.getEmail());
+            //Hero hero = (Hero) listHeros.getItemAtPosition(position);
+            Toast.makeText(NavegacaoLateral.this, "Hero: " + hero.getNome() + " selecionado!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(NavegacaoLateral.this, FormActivity.class);
+            intent.putExtra("hero", hero);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.logout) {
+            Log.d(TAG, "onAuthStateChanged:signed_in:" + id);
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(NavegacaoLateral.this, LoginActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
