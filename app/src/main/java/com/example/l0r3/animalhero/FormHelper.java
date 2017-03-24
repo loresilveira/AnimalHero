@@ -16,6 +16,7 @@ public class FormHelper {
     private final EditText campoFormSite;
     private final RatingBar campoFormNota;
     private final ImageView campoFormFoto;
+    private final String checkboxCao;
     private Hero hero;
 
     public FormHelper(FormActivity activity) {
@@ -26,6 +27,7 @@ public class FormHelper {
         campoFormSite = (EditText) activity.findViewById(R.id.formulario_site);
         campoFormNota = (RatingBar) activity.findViewById(R.id.formulario_nota);
         campoFormFoto = (ImageView) activity.findViewById(R.id.formulario_foto);
+        checkboxCao = (String) activity.findViewById(R.id.checkbox_cao);
         hero = new Hero();
     }
 
@@ -37,7 +39,8 @@ public class FormHelper {
         hero.setEmail(campoFormEmail.getText().toString());
         hero.setNota(Double.valueOf(campoFormNota.getProgress()));
         hero.setSite(campoFormSite.getText().toString());
-        hero.setCaminhoFoto((String)campoFormFoto.getTag());
+        hero.setCaminhoFoto((String) campoFormFoto.getTag());
+        hero.setCheckboxCao(checkboxCao.getText().toString());
 
         return hero;
     }
@@ -51,6 +54,7 @@ public class FormHelper {
         campoFormSite.setText(hero.getSite());
         carregaFoto(hero.getCaminhoFoto());
         campoFormNota.setProgress(hero.getNota().intValue());
+        checkboxCao.setText(hero.getCheckboxCao());
         this.hero = hero;
     }
 
@@ -62,5 +66,10 @@ public class FormHelper {
             campoFormFoto.setScaleType(ImageView.ScaleType.FIT_XY);
             campoFormFoto.setTag(caminhoFoto);
         }
+    }
+
+
+    public void checkCao(String s) {
+        checkboxCao.setText(hero.getCheckboxCao());
     }
 }

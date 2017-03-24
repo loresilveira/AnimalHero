@@ -32,7 +32,8 @@ public class HeroDAO extends SQLiteOpenHelper{
                 "email TEXT, " +
                 "site TEXT, " +
                 "nota REAL" +
-                "caminhoFoto TEXT);";
+                "caminhoFoto TEXT," +
+                "checkboxCao TEXT);";
         db.execSQL(sql);
     }
 
@@ -53,6 +54,7 @@ public class HeroDAO extends SQLiteOpenHelper{
         dados.put("email", hero.getEmail());
         dados.put("site", hero.getSite());
         dados.put("nota", hero.getNota());
+        dados.put("checkboxCao", hero.getCheckboxCao());
 
         db.insert("Heros", null, dados);
 
@@ -72,6 +74,7 @@ public class HeroDAO extends SQLiteOpenHelper{
             hero.setEmail(c.getString(c.getColumnIndex("email")));
             hero.setSite(c.getString(c.getColumnIndex("site")));
             hero.setNota(c.getDouble(c.getColumnIndex("nota")));
+            hero.setCheckboxCao(c.getString(c.getColumnIndex("checkboxCao")));
             heros.add(hero);
         }
 
@@ -102,6 +105,7 @@ public class HeroDAO extends SQLiteOpenHelper{
         dados.put("email", hero.getEmail());
         dados.put("site", hero.getSite());
         dados.put("nota", hero.getNota());
+        dados.put("checkboxCao", hero.getCheckboxCao());
         return dados;
     }
 }

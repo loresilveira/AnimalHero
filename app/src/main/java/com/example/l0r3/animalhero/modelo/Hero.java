@@ -15,6 +15,16 @@ public class Hero implements Serializable {
     private String site;
     private Double nota;
     private String caminhoFoto;
+    private String checkboxCao;
+
+    public String getCheckboxCao() {
+        return checkboxCao;
+    }
+
+    public void setCheckboxCao(String checkboxCao) {
+        this.checkboxCao = checkboxCao;
+    }
+
 
     public String getCaminhoFoto() {
         return caminhoFoto;

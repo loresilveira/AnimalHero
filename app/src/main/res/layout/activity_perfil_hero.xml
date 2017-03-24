@@ -6,8 +6,8 @@
         android:id="@+id/perfil_foto"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/person"
-        android:background="#00A8EC"/>
+        android:src="@drawable/superhero"
+        android:background="#ec5300"/>
 
     <LinearLayout
         android:id="@+id/layoutnome"
@@ -81,4 +81,4 @@
 
     </LinearLayout>
 
-/>
+</LinearLayout>

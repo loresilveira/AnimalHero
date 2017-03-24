@@ -62,16 +62,76 @@
             android:layout_height="wrap_content"
             android:hint="Site"
             android:id="@+id/formulario_site"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Animais que abriga:"
+            android:layout_marginTop="10dp"
+            android:textAlignment="left"
+            android:textSize="20dp" />
+    <RadioGroup
+        android:id="@+id/group1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal">
 
-        <RatingBar
+        <CheckBox android:id="@+id/checkbox_cao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:numStars="5"
-            android:max="10"
-            android:id="@+id/formulario_nota"/>
+            android:text="Cão"
+            android:layout_marginRight="103dp"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox android:id="@+id/checkbox_gato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gato"
+            android:onClick="onCheckboxClicked"/>
 
 
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox android:id="@+id/checkbox_pasgra"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Pássaro grande"
+            android:onClick="onCheckboxClicked"
+            android:layout_marginRight="30dp"
+            android:minWidth="10dp"/>
+
+        <CheckBox android:id="@+id/checkbox_paspeq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pássaro pequeno"
+            android:onClick="onCheckboxClicked"/>
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox android:id="@+id/checkbox_ramis"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Ramster"
+            android:onClick="onCheckboxClicked"
+            android:layout_marginRight="75dp"
+            android:minWidth="10dp"/>
+
+        <CheckBox android:id="@+id/checkbox_outros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outros"
+            android:onClick="onCheckboxClicked"/>
+
+    </RadioGroup>
 
 
     </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.l0r3.animalhero;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.l0r3.animalhero.dao.HeroDAO;
@@ -21,6 +25,10 @@ public class FormActivity extends AppCompatActivity {
 
     private FormHelper helper;
     private String caminhoFoto;
+    private  CheckBox cb;
+    private SharedPreferences preferences ;
+    private SharedPreferences.Editor editor;
+    private boolean CHECKED_STATE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,21 @@ public class FormActivity extends AppCompatActivity {
                 startActivityForResult(intentCamera, 560);
             }
         });
+
+        final CheckBox cb_cao = (CheckBox) findViewById(R.id.checkbox_cao);
+        cb_cao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cb_cao.isChecked()){
+                    helper.checkCao("Yes");
+                }
+                else{
+
+                    helper.checkCao("No");
+                }
+            }
+        });
+
 
     }
 
