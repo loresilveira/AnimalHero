@@ -22,7 +22,7 @@ public class HeroDAO extends SQLiteOpenHelper{
 
 
     public HeroDAO(Context contexto) {
-        super(contexto, "Agenda", null, 1);
+        super(contexto, "Animal Hero", null, 1);
     }
 
     @Override
@@ -34,28 +34,26 @@ public class HeroDAO extends SQLiteOpenHelper{
                 "telefone TEXT, " +
                 "email TEXT, " +
                 "site TEXT, " +
-                "nota REAL" +
+                "nota REAL, " +
                 "caminhoFoto TEXT);";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "DROP TABLE IF EXISTS Heros";
-        db.execSQL(sql);
-        onCreate(db);
+        String sql = "";
+        switch (oldVersion) {
+            case 1:
+                sql = "ALTER TABLE Heros ADD COLUMN caminhoFoto TEXT";
+                db.execSQL(sql);
+
+        }
     }
 
     public void insere(Hero hero){
         SQLiteDatabase db = getWritableDatabase(); //recupera ref do banco
 
-        ContentValues dados = new ContentValues();
-        dados.put("nome", hero.getNome());
-        dados.put("endereco", hero.getEndereco());
-        dados.put("telefone", hero.getTelefone());
-        dados.put("email", hero.getEmail());
-        dados.put("site", hero.getSite());
-        dados.put("nota", hero.getNota());
+        ContentValues dados = pegaDadosDoHero(hero);
 
         db.insert("Heros", null, dados);
 
@@ -75,6 +73,7 @@ public class HeroDAO extends SQLiteOpenHelper{
             hero.setEmail(c.getString(c.getColumnIndex("email")));
             hero.setSite(c.getString(c.getColumnIndex("site")));
             hero.setNota(c.getDouble(c.getColumnIndex("nota")));
+            hero.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
             heros.add(hero);
         }
 
@@ -98,6 +97,7 @@ public class HeroDAO extends SQLiteOpenHelper{
             hero.setEmail(c.getString(c.getColumnIndex("email")));
             hero.setSite(c.getString(c.getColumnIndex("site")));
             hero.setNota(c.getDouble(c.getColumnIndex("nota")));
+            hero.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
         } else {
             hero.setEmail(email);
         }
@@ -127,6 +127,7 @@ public class HeroDAO extends SQLiteOpenHelper{
         dados.put("email", hero.getEmail());
         dados.put("site", hero.getSite());
         dados.put("nota", hero.getNota());
+        dados.put("caminhoFoto", hero.getCaminhoFoto());
         return dados;
     }
 
