@@ -89,8 +89,8 @@ public class HeroDAO extends SQLiteOpenHelper{
         Hero hero = new Hero();
         Cursor c = db.rawQuery("select * from Heros where email = ?", new String[] {email});
         Log.d("dao", "cursor:" + c.toString());
-        if (c != null) {
-            c.moveToFirst();
+        if (c.moveToNext()) {
+            //c.moveToFirst();
             hero.setId(c.getLong(c.getColumnIndex("id")));
             hero.setNome(c.getString(c.getColumnIndex("nome")));
             hero.setEndereco(c.getString(c.getColumnIndex("endereco")));
@@ -98,9 +98,10 @@ public class HeroDAO extends SQLiteOpenHelper{
             hero.setEmail(c.getString(c.getColumnIndex("email")));
             hero.setSite(c.getString(c.getColumnIndex("site")));
             hero.setNota(c.getDouble(c.getColumnIndex("nota")));
+        } else {
+            hero.setEmail(email);
         }
-
-       return hero;
+        return hero;
     }
 
     public void deleta(Hero hero){

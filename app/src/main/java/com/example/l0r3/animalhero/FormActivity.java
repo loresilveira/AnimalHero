@@ -29,6 +29,7 @@ import java.util.Map;
 
 public class FormActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_CAMERA = 560;
     private FormHelper helper;
     private String caminhoFoto;
     private DatabaseReference mDatabase;
@@ -59,7 +60,7 @@ public class FormActivity extends AppCompatActivity {
                 File arquivoFoto = new File(caminhoFoto);
                 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(arquivoFoto));
-                startActivityForResult(intentCamera, 560);
+                startActivityForResult(intentCamera, REQUEST_CODE_CAMERA);
             }
         });
 
@@ -95,7 +96,7 @@ public class FormActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 560) {
+            if (requestCode == REQUEST_CODE_CAMERA) {
                 helper.carregaFoto(caminhoFoto);
             }
         }

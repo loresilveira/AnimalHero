@@ -202,12 +202,11 @@ public class NavegacaoLateral extends AppCompatActivity
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             HeroDAO dao = new HeroDAO(NavegacaoLateral.this);
             Hero hero = dao.getHeroByEmail(user.getEmail());
-            //Hero hero = (Hero) listHeros.getItemAtPosition(position);
-            Toast.makeText(NavegacaoLateral.this, "Hero: " + hero.getNome() + " selecionado!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NavegacaoLateral.this, "Hero: " + hero.getNome() + " selecionado!",
+                Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(NavegacaoLateral.this, FormActivity.class);
             intent.putExtra("hero", hero);
             startActivity(intent);
-
         } else if (id == R.id.logout) {
             Log.d(TAG, "onAuthStateChanged:signed_in:" + id);
             FirebaseAuth.getInstance().signOut();

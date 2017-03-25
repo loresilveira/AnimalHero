@@ -50,7 +50,9 @@ public class FormHelper {
         campoFormEmail.setText(hero.getEmail());
         campoFormSite.setText(hero.getSite());
         carregaFoto(hero.getCaminhoFoto());
-        campoFormNota.setProgress(hero.getNota().intValue());
+        if (hero.getNota() != null) {
+            campoFormNota.setProgress(hero.getNota().intValue());
+        }
         this.hero = hero;
     }
 
