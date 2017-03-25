@@ -52,6 +52,8 @@ public class FormHelper {
         carregaFoto(hero.getCaminhoFoto());
         if (hero.getNota() != null) {
             campoFormNota.setProgress(hero.getNota().intValue());
+        } else {
+            // Teste de pull --rebase
         }
         this.hero = hero;
     }
