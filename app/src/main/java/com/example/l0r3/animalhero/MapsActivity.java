@@ -32,6 +32,7 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final int ZOOM_MAP = 13;
     private GoogleMap mMap;
     private static final String TAG = "mapaTag";
 
@@ -109,7 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                    .zoom(17)                   // Sets the zoom
+                    .zoom(ZOOM_MAP)                   // Sets the zoom
                     .build();                   // Creates a CameraPosition from the builder
             Log.d(TAG, "posatual:" + cameraPosition);
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
