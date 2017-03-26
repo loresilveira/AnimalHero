@@ -1,5 +1,8 @@
 package com.example.l0r3.animalhero;
 
+import android.*;
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -22,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Localizador implements GoogleApiClient.ConnectionCallbacks, LocationListener {
 
+  public static final int REQUEST_CODE_PERM_LOCATION = 12345;
   private GoogleMap mapa;
   private GoogleApiClient client;
 
@@ -39,23 +43,15 @@ public class Localizador implements GoogleApiClient.ConnectionCallbacks, Locatio
       request.setSmallestDisplacement(50);
       request.setInterval(100);
       request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-      if ( (ActivityCompat.checkSelfPermission(client.getContext(),
-          android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) &&
-          (ActivityCompat.checkSelfPermission(client.getContext(),
-              android.Manifest.permission.ACCESS_COARSE_LOCATION)
-              != PackageManager.PERMISSION_GRANTED) ) {
-        // TODO: Consider calling
-        //    ActivityCompat#requestPermissions
-        // here to request the missing permissions, and then overriding
-        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-        //                                          int[] grantResults)
-        // to handle the case where the user grants the permission. See the documentation
-        // for ActivityCompat#requestPermissions for more details.
-        return;
+      if (ActivityCompat.checkSelfPermission(client.getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+          != PackageManager.PERMISSION_GRANTED &&
+          ActivityCompat.checkSelfPermission(client.getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
+              != PackageManager.PERMISSION_GRANTED) {
+          ActivityCompat.requestPermissions((Activity) client.getContext(),
+              new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_PERM_LOCATION);
+      } else {
+          LocationServices.FusedLocationApi.requestLocationUpdates(client, request, this);
       }
-      LocationServices.FusedLocationApi.requestLocationUpdates(client, request, this);
-
-
     }
 
     @Override

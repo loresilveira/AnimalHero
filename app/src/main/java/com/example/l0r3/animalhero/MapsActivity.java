@@ -88,29 +88,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
+            ActivityCompat.requestPermissions(MapsActivity.this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location == null) {
+              locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new MyLocationListener());
+              Log.d("GPS", "GPS Enabled");
+              location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+              Log.d(TAG, "posatual:" + location);
+            }
+            if (location != null) {
+              mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
 
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (location == null) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new MyLocationListener());
-            Log.d("GPS", "GPS Enabled");
-            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Log.d(TAG, "posatual:" + location);
+              CameraPosition cameraPosition = new CameraPosition.Builder()
+                  .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                  .zoom(ZOOM_MAP)                   // Sets the zoom
+                  .build();                   // Creates a CameraPosition from the builder
+              Log.d(TAG, "posatual:" + cameraPosition);
+              mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
         }
-        if (location != null) {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
-
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                    .zoom(ZOOM_MAP)                   // Sets the zoom
-                    .build();                   // Creates a CameraPosition from the builder
-            Log.d(TAG, "posatual:" + cameraPosition);
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        }
-
     }
 }
 class MyLocationListener implements android.location.LocationListener {
