@@ -35,7 +35,13 @@ public class HeroDAO extends SQLiteOpenHelper{
                 "email TEXT, " +
                 "site TEXT, " +
                 "nota REAL, " +
-                "caminhoFoto TEXT);";
+                "caminhoFoto TEXT, " +
+                "check_cao INTEGER, " +
+                "check_gato INTEGER, " +
+                "check_pasGra INTEGER, " +
+                "check_pasPeq INTEGER, " +
+                "check_ramister INTEGER, " +
+                "check_outros INTEGER);";
         db.execSQL(sql);
     }
 
@@ -44,7 +50,14 @@ public class HeroDAO extends SQLiteOpenHelper{
         String sql = "";
         switch (oldVersion) {
             case 1:
-                sql = "ALTER TABLE Heros ADD COLUMN caminhoFoto TEXT";
+                System.out.println("entrou alter tableeeeeeeeeeeee   ");
+                sql = "ALTER TABLE Heros ADD COLUMN caminhoFoto TEXT, ";
+                sql += " ADD COLUMN check_cao INTEGER, ";
+                sql += " ADD COLUMN check_gato INTEGER, ";
+                sql += " ADD COLUMN check_pasGra INTEGER, ";
+                sql += " ADD COLUMN check_pasPeq INTEGER, ";
+                sql += " ADD COLUMN check_ramister INTEGER, ";
+                sql += " ADD COLUMN check_outros INTEGER ";
                 db.execSQL(sql);
 
         }
@@ -63,6 +76,7 @@ public class HeroDAO extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         String sql = "SELECT * FROM Heros;";
         Cursor c = db.rawQuery(sql,null);
+        System.out.println("qtd de colunaaaaas:   " + c.getColumnCount());
         List<Hero> heros = new ArrayList<Hero>();
         while (c.moveToNext()){
             Hero hero = new Hero();
@@ -74,6 +88,13 @@ public class HeroDAO extends SQLiteOpenHelper{
             hero.setSite(c.getString(c.getColumnIndex("site")));
             hero.setNota(c.getDouble(c.getColumnIndex("nota")));
             hero.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
+            hero.setCheck_cao(c.getShort(c.getColumnIndex("check_cao")));
+            hero.setCheck_gato(c.getShort(c.getColumnIndex("check_gato")));
+            hero.setCheck_pasGra(c.getShort(c.getColumnIndex("check_pasGra")));
+            hero.setCheck_pasPeq(c.getShort(c.getColumnIndex("check_pasPeq")));
+            hero.setCheck_ramister(c.getShort(c.getColumnIndex("check_ramister")));
+            hero.setCheck_outros(c.getShort(c.getColumnIndex("check_outros")));
+
             heros.add(hero);
         }
 
@@ -98,6 +119,12 @@ public class HeroDAO extends SQLiteOpenHelper{
             hero.setSite(c.getString(c.getColumnIndex("site")));
             hero.setNota(c.getDouble(c.getColumnIndex("nota")));
             hero.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
+            hero.setCheck_cao(c.getShort(c.getColumnIndex("check_cao")));
+            hero.setCheck_gato(c.getShort(c.getColumnIndex("check_gato")));
+            hero.setCheck_pasGra(c.getShort(c.getColumnIndex("check_pasGra")));
+            hero.setCheck_pasPeq(c.getShort(c.getColumnIndex("check_pasPeq")));
+            hero.setCheck_ramister(c.getShort(c.getColumnIndex("check_ramister")));
+            hero.setCheck_outros(c.getShort(c.getColumnIndex("check_outros")));
         } else {
             hero.setEmail(email);
         }
@@ -128,6 +155,13 @@ public class HeroDAO extends SQLiteOpenHelper{
         dados.put("site", hero.getSite());
         dados.put("nota", hero.getNota());
         dados.put("caminhoFoto", hero.getCaminhoFoto());
+        dados.put("check_cao", hero.getCheck_cao());
+        dados.put("check_gato", hero.getCheck_gato());
+        dados.put("check_pasGra", hero.getCheck_pasGra());
+        dados.put("check_pasPeq", hero.getCheck_pasPeq());
+        dados.put("check_ramister", hero.getCheck_ramister());
+        dados.put("check_outros", hero.getCheck_outros());
+
         return dados;
     }
 

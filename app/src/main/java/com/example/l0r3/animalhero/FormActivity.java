@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.l0r3.animalhero.dao.HeroDAO;
@@ -64,6 +65,64 @@ public class FormActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkbox_cao:
+                if (checked) {
+                    helper.pegaHero().setCheck_cao((short) 1);
+                }
+                else
+                    helper.pegaHero().setCheck_cao((short) 0);
+                break;
+
+            case R.id.checkbox_gato:
+                if (checked){
+                    helper.pegaHero().setCheck_gato((short) 1);
+                }
+                else
+                    helper.pegaHero().setCheck_gato((short) 0);
+                break;
+
+            case R.id.checkbox_pasgra:
+                if (checked){
+                    helper.pegaHero().setCheck_pasGra((short) 1);
+                }
+                else
+                    helper.pegaHero().setCheck_pasGra((short) 0);
+                break;
+
+            case R.id.checkbox_paspeq:
+                if (checked){
+                    helper.pegaHero().setCheck_pasPeq((short) 1);
+                }
+                else
+                    helper.pegaHero().setCheck_pasPeq((short) 0);
+                break;
+
+            case R.id.checkbox_ramis:
+                if (checked){
+                    helper.pegaHero().setCheck_ramister((short) 1);
+                }
+                else
+                    helper.pegaHero().setCheck_ramister((short) 0);
+                break;
+
+            case R.id.checkbox_outros:
+                if (checked){
+                    helper.pegaHero().setCheck_outros((short) 1);
+                }
+                else
+                    helper.pegaHero().setCheck_outros((short) 0);
+                break;
+
+            // TODO: Veggie sandwich
+        }
     }
 
     @Override

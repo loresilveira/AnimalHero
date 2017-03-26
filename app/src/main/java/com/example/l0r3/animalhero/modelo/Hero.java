@@ -19,9 +19,66 @@ public class Hero implements Serializable {
     private String site;
     private Double nota;
     private String caminhoFoto;
+    private short check_cao;
+    private short check_gato;
+    private short check_pasGra;
+    private short check_pasPeq;
+    private short check_ramister;
+    private short check_outros;
+
+
+
 
     public Hero() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
+    }
+
+    public short getCheck_cao() {
+        return check_cao;
+    }
+
+    public void setCheck_cao(short check_cao) {
+        this.check_cao = check_cao;
+    }
+
+    public short getCheck_gato() {
+        return check_gato;
+    }
+
+    public void setCheck_gato(short check_gato) {
+        this.check_gato = check_gato;
+    }
+
+    public short getCheck_pasGra() {
+        return check_pasGra;
+    }
+
+    public void setCheck_pasGra(short check_pasGra) {
+        this.check_pasGra = check_pasGra;
+    }
+
+    public short getCheck_pasPeq() {
+        return check_pasPeq;
+    }
+
+    public void setCheck_pasPeq(short check_pasPeq) {
+        this.check_pasPeq = check_pasPeq;
+    }
+
+    public short getCheck_ramister() {
+        return check_ramister;
+    }
+
+    public void setCheck_ramister(short check_ramister) {
+        this.check_ramister = check_ramister;
+    }
+
+    public short getCheck_outros() {
+        return check_outros;
+    }
+
+    public void setCheck_outros(short check_outros) {
+        this.check_outros = check_outros;
     }
 
     public String getCaminhoFoto() {
