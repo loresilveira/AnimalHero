@@ -34,7 +34,7 @@ public class NavegacaoLateral extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listHeros;
-    private static final String TAG = "navegaçãoTag";
+    private static final String TAG = "navegacaoTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +161,7 @@ public class NavegacaoLateral extends AppCompatActivity
 
                 HeroDAO dao = new HeroDAO(NavegacaoLateral.this);
                 dao.deleta(heroClicado);
-                Toast.makeText(NavegacaoLateral.this, "Hero(a):" + heroClicado.getNome() + "deletado(a)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NavegacaoLateral.this, "Hero(a): " + heroClicado.getNome() + " deletado(a)", Toast.LENGTH_SHORT).show();
                 dao.close();
                 carregaLista();
                 return false;

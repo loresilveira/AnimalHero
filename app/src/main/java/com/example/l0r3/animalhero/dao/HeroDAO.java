@@ -48,14 +48,13 @@ public class HeroDAO extends SQLiteOpenHelper{
         String sql = "";
         switch (oldVersion) {
             case 1:
-                System.out.println("entrou alter tableeeeeeeeeeeee   ");
-                sql = "ALTER TABLE Heros ADD COLUMN caminhoFoto TEXT, ";
-                sql += " ADD COLUMN check_cao INTEGER, ";
+                Log.d("SQL", "entrou ALTER TABLE ");
+                sql = "ALTER TABLE Heros ADD COLUMN check_cao INTEGER, ";
                 sql += " ADD COLUMN check_gato INTEGER, ";
                 sql += " ADD COLUMN check_pasGra INTEGER, ";
                 sql += " ADD COLUMN check_pasPeq INTEGER, ";
                 sql += " ADD COLUMN check_ramister INTEGER, ";
-                sql += " ADD COLUMN check_outros INTEGER ";
+                sql += " ADD COLUMN check_outros INTEGER ;";
                 db.execSQL(sql);
         }
     }
@@ -73,7 +72,7 @@ public class HeroDAO extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         String sql = "SELECT * FROM Heros;";
         Cursor c = db.rawQuery(sql,null);
-        System.out.println("qtd de colunas:   " + c.getColumnCount());
+        Log.d("SQL", "qtd de colunas: " + c.getColumnCount());
         List<Hero> heros = new ArrayList<>();
         while (c.moveToNext()){
             Hero hero = new Hero();
@@ -101,7 +100,7 @@ public class HeroDAO extends SQLiteOpenHelper{
 
     public Hero getHeroByEmail(String email){
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "email =?";
+        String sql = "email = ?";
 
         Hero hero = new Hero();
         Cursor c = db.rawQuery("select * from Heros where email = ?", new String[] {email});
