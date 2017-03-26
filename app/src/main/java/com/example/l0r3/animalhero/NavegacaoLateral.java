@@ -201,6 +201,7 @@ public class NavegacaoLateral extends AppCompatActivity
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             HeroDAO dao = new HeroDAO(NavegacaoLateral.this);
             Hero hero = dao.getHeroByEmail(user.getEmail());
+            dao.close();
             Toast.makeText(NavegacaoLateral.this, "Hero: " + hero.getNome() + " selecionado!",
                 Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(NavegacaoLateral.this, FormActivity.class);

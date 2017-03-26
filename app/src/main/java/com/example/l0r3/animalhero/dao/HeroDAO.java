@@ -20,7 +20,7 @@ public class HeroDAO extends SQLiteOpenHelper{
 
 
     public HeroDAO(Context contexto) {
-        super(contexto, "Animal Hero", null, 1);
+        super(contexto, "Animal Hero", null, 2);
     }
 
     @Override
@@ -57,7 +57,6 @@ public class HeroDAO extends SQLiteOpenHelper{
                 sql += " ADD COLUMN check_ramister INTEGER, ";
                 sql += " ADD COLUMN check_outros INTEGER ";
                 db.execSQL(sql);
-
         }
     }
 
@@ -74,8 +73,8 @@ public class HeroDAO extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         String sql = "SELECT * FROM Heros;";
         Cursor c = db.rawQuery(sql,null);
-        System.out.println("qtd de colunaaaaas:   " + c.getColumnCount());
-        List<Hero> heros = new ArrayList<Hero>();
+        System.out.println("qtd de colunas:   " + c.getColumnCount());
+        List<Hero> heros = new ArrayList<>();
         while (c.moveToNext()){
             Hero hero = new Hero();
             hero.setId(c.getLong(c.getColumnIndex("id")));
