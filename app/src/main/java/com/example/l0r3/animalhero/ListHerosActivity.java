@@ -156,7 +156,7 @@ public class ListHerosActivity extends AppCompatActivity {
 
                 HeroDAO dao = new HeroDAO(ListHerosActivity.this);
                 dao.deleta(heroClicado);
-                Toast.makeText(ListHerosActivity.this, "Hero(a):" + heroClicado.getNome() + "deletado(a)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListHerosActivity.this, "Hero(a): " + heroClicado.getNome() + " deletado(a)", Toast.LENGTH_SHORT).show();
                 dao.close();
                 carregaLista();
                 return false;
