@@ -148,8 +148,11 @@ public class Hero implements Serializable {
 
     @Override
     public String toString(){
-        return getId() + " - " + getNome();
-
+        if (getNome() != null) {
+            return getNome();
+        } else {
+            return "Hero!";
+        }
     }
 
 
