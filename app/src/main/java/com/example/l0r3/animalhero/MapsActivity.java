@@ -43,6 +43,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public LatLng pegaCoordenadasPorEndereco(String endereco) throws IOException {
+        if (endereco.isEmpty()) {
+            return null;
+        }
         Geocoder geo = new Geocoder(this);
         List<Address> listaEnderecos = geo.getFromLocationName(endereco, 1);
         LatLng latLng = new LatLng(listaEnderecos.get(0).getLatitude(), listaEnderecos.get(0).getLongitude());
@@ -76,10 +79,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d(TAG, "catch:");
                 e.printStackTrace();
             }
-            MarkerOptions mark = new MarkerOptions().position(posicaoHero).title(hero.getNome());
-            Log.d(TAG, "mark:" + mark);
-            mark.snippet(String.valueOf(hero.getNota()));
-            mMap.addMarker(mark);
+            if (posicaoHero != null) {
+                MarkerOptions mark = new MarkerOptions().position(posicaoHero).title(hero.getNome());
+                Log.d(TAG, "mark:" + mark);
+                mark.snippet(String.valueOf(hero.getNota()));
+                mMap.addMarker(mark);
+            }
         }
         dao.close();
 
