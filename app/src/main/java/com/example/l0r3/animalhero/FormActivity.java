@@ -3,30 +3,23 @@ package com.example.l0r3.animalhero;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.example.l0r3.animalhero.dao.HeroDAO;
 import com.example.l0r3.animalhero.modelo.Hero;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -159,6 +152,5 @@ public class FormActivity extends AppCompatActivity {
                 helper.carregaFoto(caminhoFoto);
             }
         }
-
     }
 }
