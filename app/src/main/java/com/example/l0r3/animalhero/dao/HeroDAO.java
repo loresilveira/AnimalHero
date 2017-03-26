@@ -10,9 +10,7 @@ import android.util.Log;
 import com.example.l0r3.animalhero.modelo.Hero;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Lore on 15/03/2017.
