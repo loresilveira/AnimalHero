@@ -23,9 +23,6 @@
         android:name="android.support.multidex.MultiDexApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
 
         <activity
             android:name=".LoginActivity"
@@ -56,7 +53,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA0OEmhhkuNMn8NS9ub8cyXE58YE5LUmNc" />
+            android:value="@string/google_maps_key" />
 
         <activity
             android:name=".MapsActivity"

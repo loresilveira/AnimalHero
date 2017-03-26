@@ -100,6 +100,5 @@ public class FormActivity extends AppCompatActivity {
                 helper.carregaFoto(caminhoFoto);
             }
         }
-
     }
 }
