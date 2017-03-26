@@ -106,8 +106,7 @@ public class HeroDAO extends SQLiteOpenHelper{
         Hero hero = new Hero();
         Cursor c = db.rawQuery("select * from Heros where email = ?", new String[] {email});
         Log.d("dao", "cursor:" + c.toString());
-        if (c.moveToNext()) {
-            //c.moveToFirst();
+        if (c.moveToFirst();) {
             hero.setId(c.getLong(c.getColumnIndex("id")));
             hero.setNome(c.getString(c.getColumnIndex("nome")));
             hero.setEndereco(c.getString(c.getColumnIndex("endereco")));
