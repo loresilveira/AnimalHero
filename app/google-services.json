@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "934142790124-lk1784ntm7r6ib35ijhi6nrru6bbbds6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.l0r3.animalhero",
+            "certificate_hash": "46e9c54d4d8839560bd3257821d4d065b77d408a"
+          }
+        },
+        {
           "client_id": "934142790124-400si516rfomg6pbjgm6dvc7qci6q8dl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
